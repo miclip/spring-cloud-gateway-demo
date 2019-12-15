@@ -1,4 +1,4 @@
-package com.devglan.gatewayservice.secondservice;
+package com.devglan.gatewayservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

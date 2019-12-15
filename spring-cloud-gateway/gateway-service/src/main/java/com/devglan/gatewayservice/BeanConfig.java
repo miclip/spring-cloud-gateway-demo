@@ -21,6 +21,7 @@ public class BeanConfig {
 
                 .route(r -> r.path("/api/v1/second/**")
                         .filters(f -> f.rewritePath("/api/v1/second/(?<remains>.*)", "/${remains}")
+                                .addRequestHeader("X-second-Header", "second-service-header")
                                 .hystrix(c -> c.setName("hystrix")
                                         .setFallbackUri("forward:/fallback/second")))
                         .uri("lb://SECOND-SERVICE/")

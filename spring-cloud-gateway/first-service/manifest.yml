@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: first-service
+  name: first-service
+  namespace: spring
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      run: first-service
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: first-service
+    spec:
+      containers:
+      - image: miclip/first-service:0.0.11
+        imagePullPolicy: IfNotPresent
+        name: first-service
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: first-service
+  name: first-service
+  namespace: spring
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 30159
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: first-service
+  sessionAffinity: None
+  type: NodePort
