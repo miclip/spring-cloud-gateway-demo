@@ -24,7 +24,7 @@ spec:
         run: first-service
     spec:
       containers:
-      - image: miclip/first-service:0.0.11
+      - image: miclip/first-service:0.0.18
         imagePullPolicy: IfNotPresent
         name: first-service
         terminationMessagePath: /dev/termination-log

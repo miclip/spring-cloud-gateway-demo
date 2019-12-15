@@ -24,7 +24,7 @@ spec:
         run: gateway-service
     spec:
       containers:
-      - image: miclip/gateway-service:0.0.11
+      - image: miclip/gateway-service:0.0.18
         imagePullPolicy: IfNotPresent
         name: gateway-service
         terminationMessagePath: /dev/termination-log
